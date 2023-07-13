@@ -185,12 +185,13 @@ def calc_R(thicknesses, materials, wavelengths,
 
 
 def batch_calc_R(thicknesses_many, materials_many, wavelengths,
-                 n_env=1.0, theta_incidence=0, polarization=0):
+                 n_env=1.0, theta_incidence=0, polarization=0, verbose=True):
     from tqdm import tqdm
 
     """batch process several layer-stack reflectivity calculations"""
     all_R = []
-    print('pymoosh: calculating R for {} samples...'.format(len(thicknesses_many)))
+    if verbose:
+        print('pymoosh: calculating R for {} samples...'.format(len(thicknesses_many)))
     for [_t, _m] in tqdm(zip(thicknesses_many, materials_many)):
         _R = calc_R(_t, _m, wavelengths, n_env, theta_incidence, polarization)
         all_R.append(_R)
